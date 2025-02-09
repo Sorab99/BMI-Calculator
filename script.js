@@ -1,22 +1,24 @@
-// Function to calculate BMI using ES6 syntax
-const calculateBMI = (weight, height) => {
-  if (height === 0) return 'Height cannot be zero'; // Prevent division by zero
+function calculateBMI() {
+    let weight = document.getElementById("weight").value;
+    let height = document.getElementById("height").value;
 
-  const bmi = weight / (height ** 2);  // BMI formula: weight (kg) / height (m)^2
-  return bmi.toFixed(2);  // Return BMI rounded to 2 decimal places
+    if (weight === "" || height === "") {
+        alert("Please enter valid values for weight and height.");
+        return;
+    }
+
+    let bmi = (weight / (height * height)).toFixed(2);
+    let resultText = `Your BMI is ${bmi}. `;
+
+    if (bmi < 18.5) {
+        resultText += "You are underweight.";
+    } else if (bmi >= 18.5 && bmi < 24.9) {
+        resultText += "You have a normal weight.";
+    } else if (bmi >= 25 && bmi < 29.9) {
+        resultText += "You are overweight.";
+    } else {
+        resultText += "You are obese.";
+    }
+
+    document.getElementById("result").innerText = resultText;
 }
-
-// Function to classify BMI
-const classifyBMI = (bmi) => {
-  if (bmi < 18.5) return 'Underweight';
-  if (bmi >= 18.5 && bmi < 24.9) return 'Normal weight';
-  if (bmi >= 25 && bmi < 29.9) return 'Overweight';
-  return 'Obesity';
-}
-
-// Example usage
-const weight = 70;  // kg
-const height = 1.75; // meters
-
-const bmi = calculateBMI(weight, height);
-console.log(`Your BMI is ${bmi} and you are classified as: ${classifyBMI(bmi)}`);
